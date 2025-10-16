@@ -34,7 +34,11 @@ class ColonCancerDataset(Dataset):
         return self.data.classes
 
 
-transform = transforms.Compose([transforms.ToTensor()])
+transform = transforms.Compose([
+    transforms.Resize((384, 384)),
+    transforms.ToTensor()
+])
+
 dataset = ColonCancerDataset(data_dir='./colon_output/train', transform=transform)
 len(dataset)
 target_to_class = {v: k for k, v in ImageFolder('./colon_output/train').class_to_idx.items()}
@@ -78,9 +82,9 @@ train_dataset = ColonCancerDataset(data_dir=train_folder, transform=transform)
 test_dataset = ColonCancerDataset(data_dir=test_folder, transform=transform)
 validation_dataset = ColonCancerDataset(data_dir=validation_folder, transform=transform)
 
-train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False)
-validation_loader = DataLoader(validation_dataset, batch_size=16, shuffle=False)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+validation_loader = DataLoader(validation_dataset, batch_size=32, shuffle=False)
 
 
 
