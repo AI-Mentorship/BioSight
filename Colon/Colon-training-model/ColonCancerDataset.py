@@ -8,6 +8,8 @@ from torchvision.datasets import ImageFolder
 import timm
 
 import matplotlib.pyplot as plt # For data viz
+import kagglehub
+import os
 import pandas as pd
 import numpy as np
 import sys
@@ -18,6 +20,7 @@ print('PyTorch version', torch.__version__)
 print('Torchvision version', torchvision.__version__)
 print('Numpy version', np.__version__)
 print('Pandas version', pd.__version__)
+
 
 class ColonCancerDataset(Dataset):
     def __init__(self, data_dir, transform=None):
@@ -52,7 +55,7 @@ for images, labels in dataloader:
     break
 
 class ColonCancerClassifer(nn.Module):
-    def __init__(self, num_classes=3):
+    def __init__(self, num_classes=2):
         super(ColonCancerClassifer, self).__init__()
         self.base_model = timm.create_model('efficientnet_b0', pretrained=True)
         self.features = nn.Sequential(*list(self.base_model.children())[:-1])
@@ -69,7 +72,7 @@ class ColonCancerClassifer(nn.Module):
         output = self.classifier(x)
         return output
 
-model = ColonCancerClassifer(num_classes=3)
+model = ColonCancerClassifer(num_classes=2)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
