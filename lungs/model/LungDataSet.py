@@ -33,7 +33,7 @@ class LungDataset(Dataset):
 
 # split using splitfolders seed 1234
 
-transform = transforms.Compose([transforms.ToTensor()])
+transform = transforms.Compose([transforms.Resize((384, 384)), transforms.ToTensor()])
 dataset = LungDataset(data_dir='./output/train', transform=transform)
 target_to_class = {v: k for k, v in ImageFolder('./output/train').class_to_idx.items()}
 print(target_to_class)
@@ -102,3 +102,9 @@ for epoch in range(num_epochs):
     train_loss = running_loss / len(train_loader.dataset)
     train_losses.append(train_loss)
     print(f"Epoch {epoch+1}/{num_epochs} - Train loss: {train_loss}")
+
+plt.plot(train_losses, label='Training loss')
+plt.plot(val_losses, label='Validation loss')
+plt.legend()
+plt.title("Loss over epochs")
+plt.show()
