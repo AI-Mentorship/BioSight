@@ -34,8 +34,8 @@ class LungDataset(Dataset):
 # split using splitfolders seed 1234
 
 transform = transforms.Compose([transforms.Resize((384, 384)), transforms.ToTensor()])
-dataset = LungDataset(data_dir='./output/train', transform=transform)
-target_to_class = {v: k for k, v in ImageFolder('./output/train').class_to_idx.items()}
+dataset = LungDataset(data_dir='./lungs/output/train', transform=transform)
+target_to_class = {v: k for k, v in ImageFolder('./lungs/output/train').class_to_idx.items()}
 print(target_to_class)
 
 dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
@@ -70,7 +70,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 train_folder = dataset
-test_folder = LungDataset('./output/test')
+test_folder = LungDataset('./lungs/output/test')
 
 train_loader = DataLoader(train_folder, batch_size=16, shuffle=True)
 test_loader = DataLoader(test_folder, batch_size=16, shuffle=True)
