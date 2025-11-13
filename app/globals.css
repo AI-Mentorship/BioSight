@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom color palette */
+:root {
+  --background: #f9fafb;
+  --foreground: #242424;
+  --card: #ffffff;
+  --card-foreground: #242424;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #6366f1;
+  --secondary-foreground: #ffffff;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #5b21b6;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7eb;
+  --input: #f3f4f6;
+  --ring: #4f46e5;
+}
+
+/* Dark mode overrides */
+.dark {
+  --background: #121212;
+  --foreground: #f9fafb;
+  --card: #1e1e1e;
+  --card-foreground: #f9fafb;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #818cf8;
+  --secondary-foreground: #ffffff;
+  --muted: #2c2c2c;
+  --muted-foreground: #c7c7c7;
+}
+
+/* Tailwind base layer overrides */
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  * {
+    @apply border-border outline-ring;
+  }
+}
