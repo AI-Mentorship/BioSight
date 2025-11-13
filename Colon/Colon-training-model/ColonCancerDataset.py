@@ -42,9 +42,9 @@ transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
-dataset = ColonCancerDataset(data_dir='./colon_output/train', transform=transform)
+dataset = ColonCancerDataset(data_dir='./Colon/Colon-training-model/colon_output/train', transform=transform)
 len(dataset)
-target_to_class = {v: k for k, v in ImageFolder('./colon_output/train').class_to_idx.items()}
+target_to_class = {v: k for k, v in ImageFolder('./Colon/Colon-training-model/colon_output/train').class_to_idx.items()}
 print(target_to_class)
 
 dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
@@ -77,9 +77,9 @@ model = ColonCancerClassifer(num_classes=2)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-train_folder = './colon_output/train'
-test_folder = './colon_output/test'
-validation_folder = './colon_output/validate' 
+train_folder = './Colon/Colon-training-model//colon_output/train'
+test_folder = './Colon/Colon-training-model//colon_output/test'
+validation_folder = './Colon/Colon-training-model//colon_output/validate' 
 
 train_dataset = ColonCancerDataset(data_dir=train_folder, transform=transform)
 test_dataset = ColonCancerDataset(data_dir=test_folder, transform=transform)
