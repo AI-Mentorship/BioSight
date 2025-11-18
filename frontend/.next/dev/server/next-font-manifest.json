@@ -1,0 +1,11 @@
+{
+  "app": {
+    "[project]/app/analysis/[caseId]/page": [],
+    "[project]/app/auth/page": [],
+    "[project]/app/page": [],
+    "[project]/app/upload/page": []
+  },
+  "appUsingSizeAdjust": false,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

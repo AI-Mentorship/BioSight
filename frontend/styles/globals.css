@@ -1,0 +1,150 @@
+/* GLOBAL IMPORTS — MUST BE FIRST */
+@import 'tw-animate-css';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/cormorant-garamond/700-italic.css';
+
+/* TAILWIND */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CUSTOM FONT */
+@layer utilities {
+  .font-serif {
+    font-family: "Cormorant Garamond", serif;
+  }
+}
+
+/* ANIMATION */
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeSlideUp {
+  animation: fadeSlideUp 0.9s ease-out forwards;
+}
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* Scroll Reveal Animations */
+@keyframes scrollReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.scroll-reveal-enter {
+  animation: scrollReveal 500ms ease-out forwards;
+}
+
+.scale-reveal-enter {
+  animation: scaleReveal 500ms ease-out forwards;
+}
+
+/* Staggered child animations */
+.scroll-reveal-child {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: scrollReveal 500ms ease-out forwards;
+}
+
+.scroll-reveal-child:nth-child(1) { animation-delay: 0ms; }
+.scroll-reveal-child:nth-child(2) { animation-delay: 100ms; }
+.scroll-reveal-child:nth-child(3) { animation-delay: 200ms; }
+.scroll-reveal-child:nth-child(4) { animation-delay: 300ms; }
+.scroll-reveal-child:nth-child(5) { animation-delay: 400ms; }
+.scroll-reveal-child:nth-child(6) { animation-delay: 500ms; }
+.scroll-reveal-child:nth-child(7) { animation-delay: 600ms; }
+.scroll-reveal-child:nth-child(8) { animation-delay: 700ms; }
+
+/* THEME COLOR VARIABLES
+   These variables match the tokens referenced in `tailwind.config.js` so classes
+   like `bg-background` and `text-foreground` resolve to real colors.
+*/
+:root {
+  /* Light mode */
+  --background: #ffffff;
+  --foreground: #0f1724;
+  --border: #e6e6e9;
+  --input: #ffffff;
+  --ring: #60a5fa;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --primary: #0ea5a4;
+  --primary-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --accent: #f59e0b;
+  --accent-foreground: #0f1724;
+  --popover: #ffffff;
+  --popover-foreground: #0f1724;
+  --card: #ffffff;
+  --card-foreground: #0f1724;
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #0f1724;
+  --sidebar-primary: #0ea5a4;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f59e0b;
+  --sidebar-accent-foreground: #0f1724;
+  --sidebar-border: #e6e6e9;
+  --sidebar-ring: #60a5fa;
+
+  /* Compatibility variables (legacy) */
+  --bg: var(--background);
+  --fg: var(--foreground);
+}
+
+/* Dark mode overrides applied when `class="dark"` is on <html> */
+.dark {
+  --background: #0b1220;
+  --foreground: #e6eef8;
+  --border: #1f2937;
+  --input: #0f1724;
+  --ring: #2563eb;
+  --muted: #0b1220;
+  --muted-foreground: #9ca3af;
+  --primary: #38bdf8;
+  --primary-foreground: #0b1220;
+  --destructive: #ef4444;
+  --destructive-foreground: #fff;
+  --accent: #f59e0b;
+  --accent-foreground: #0b1220;
+  --popover: #0f1724;
+  --popover-foreground: #e6eef8;
+  --card: #0f1724;
+  --card-foreground: #e6eef8;
+  --sidebar: #071024;
+  --sidebar-foreground: #e6eef8;
+  --sidebar-primary: #38bdf8;
+  --sidebar-primary-foreground: #071024;
+  --sidebar-accent: #f59e0b;
+  --sidebar-accent-foreground: #071024;
+  --sidebar-border: #12233a;
+  --sidebar-ring: #2563eb;
+
+  /* Legacy compatibility */
+  --bg: var(--background);
+  --fg: var(--foreground);
+}
+
+/* APPLY BACKGROUND + TEXT */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}

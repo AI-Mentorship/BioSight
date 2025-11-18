@@ -1,0 +1,6 @@
+{
+  "/analysis/[caseId]/page": "app/analysis/[caseId]/page.js",
+  "/auth/page": "app/auth/page.js",
+  "/page": "app/page.js",
+  "/upload/page": "app/upload/page.js"
+}
