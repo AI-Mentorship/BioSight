@@ -70,7 +70,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 train_folder = dataset
-test_folder = LungDataset('./lungs/output/test')
+test_folder = LungDataset('./lungs/output/test', transform=transform)
 
 train_loader = DataLoader(train_folder, batch_size=16, shuffle=True)
 test_loader = DataLoader(test_folder, batch_size=16, shuffle=True)
@@ -108,3 +108,30 @@ plt.plot(val_losses, label='Validation loss')
 plt.legend()
 plt.title("Loss over epochs")
 plt.show()
+
+model.eval()
+test_loss = 0.0
+correct = 0
+total = 0
+with torch.no_grad():
+    for images, labels in tqdm(test_loader, desc="Testing loop"):
+        images, labels = images.to(device), labels.to(device)
+
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+
+        test_loss += loss.item() * labels.size(0)
+
+        _, predicted = torch.max(outputs, dim=1)
+
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+avg_test_loss = test_loss / len(test_loader.dataset)
+accuracy = correct / total
+print(f"Test loss: {avg_test_loss:.4f}  |  Test accuracy: {accuracy*100:.2f}%")
+
+torch.save({
+    "model_state": model.state_dict(),
+    "optimizer_state": optimizer.state_dict(),
+    "epoch": epoch
+}, "lung_model.pth")
