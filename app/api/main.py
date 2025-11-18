@@ -14,6 +14,7 @@ import torchvision.transforms as transforms
 
 from .model_def import LungCancerClassifer
 from .model_def import OralCancerClassifier
+from .model_def import ColonCancerClassifier
 
 app = FastAPI()
 
@@ -55,7 +56,7 @@ lung_model.eval()
 
 CERVICAL_CHECKPOINT_PATH = os.path.join(BASE_DIR, "models", "cervical_model.pth")
 CERVICAL_CLASS_NAMES = ["Dyskeratotic", "Koilocytotic", "Metaplastic", "Parabasal", "Superficial-Intermediate"] 
-cervical_model = models.resnet50(pretrained=False)
+cervical_model = models.resnet50(num_classes = 5)
 cervical_model.fc = nn.Linear(2048, 5)
 cervical_checkpoint = torch.load(CERVICAL_CHECKPOINT_PATH, map_location=DEVICE)
 cervical_model.load_state_dict(cervical_checkpoint)
@@ -71,6 +72,16 @@ oral_checkpoint = torch.load(ORAL_CHECKPOINT_PATH, map_location=DEVICE)
 oral_model.load_state_dict(oral_checkpoint)
 oral_model.to(DEVICE)
 oral_model.eval()
+
+########################### COLON ##############################
+
+COLON_CHECKPOINT_PATH = os.path.join(BASE_DIR, "models", "colon_model.pth")
+COLON_CLASS_NAMES = ["Adenocarcinoma", "Normal"] 
+colon_model = OralCancerClassifier(num_classes=len(COLON_CLASS_NAMES))
+colon_checkpoint = torch.load(COLON_CHECKPOINT_PATH, map_location=DEVICE)
+colon_model.load_state_dict(colon_checkpoint)
+colon_model.to(DEVICE)
+colon_model.eval()
 
 @app.post("/predict")
 async def predict(
@@ -90,6 +101,9 @@ async def predict(
         elif cancer_type == "oral":
             model = oral_model
             class_names = ORAL_CLASS_NAMES
+        elif cancer_type == "colon":
+            model = colon_model
+            class_names = COLON_CLASS_NAMES
         else:
             return JSONResponse(
                 status_code=400,
