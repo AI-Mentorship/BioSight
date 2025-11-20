@@ -120,13 +120,7 @@ async def predict(
 
         contents = await file.read()
         image = Image.open(io.BytesIO(contents)).convert("RGB")
-
-        filename = f"{uuid4().hex}.png"
-        save_path = os.path.join(UPLOAD_DIR, filename)
-        image.save(save_path)
-
         
-
         img_tensor = transform(image).unsqueeze(0).to(DEVICE)
 
         with torch.no_grad():
