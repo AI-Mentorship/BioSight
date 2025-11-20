@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Microscope, BarChart3, FileText, Lock, ShieldCheck, Users, Image as ImageIcon } from "lucide-react"
 import Carousel from '@/components/carousel'
 import ScrollRevealSection from '@/components/scroll-reveal-section'
+import Image from "next/image"
 
 export default function Home() {
   return (
@@ -24,8 +25,7 @@ export default function Home() {
 
         {/* Subheadline */}
         <p className="mt-6 text-lg text-gray-600 max-w-2xl text-center opacity-0 animate-fadeSlideUp delay-200">
-          BioSight assists oncologists with AI-powered analysis of histopathological images, providing
-          confidence metrics and explainable diagnostic support to accelerate clinical decision-making.
+          BioSight assists oncologists with AI-powered analysis of histopathological images to accelerate clinical decision-making.
         </p>
 
         {/* CTA */}
@@ -79,22 +79,6 @@ export default function Home() {
         </section>
       </ScrollRevealSection>
 
-      {/* TRUSTED BY */}
-      <ScrollRevealSection>
-        <section className="py-8 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto text-center">
-            <h4 className="text-sm font-semibold uppercase text-muted-foreground mb-4">Trusted By</h4>
-            <div className="flex items-center justify-center gap-6 flex-wrap">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="w-32 h-12 bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center border border-border">
-                  <Users className="w-6 h-6 text-gray-400" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </ScrollRevealSection>
-
       {/* SAMPLE ANALYSIS PREVIEW */}
       <ScrollRevealSection>
         <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
@@ -102,16 +86,31 @@ export default function Home() {
             <h3 className="text-2xl font-serif font-bold mb-6 text-[#054c5b]">Sample Analysis Preview</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="rounded-lg overflow-hidden border border-border bg-card p-4 flex flex-col items-center justify-center">
-                <div className="w-full h-64 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center">
-                  <ImageIcon className="w-10 h-10 text-gray-400" />
+                <div className="w-full h-64 dark:bg-gray-800 rounded-md flex items-center justify-center">
+                  <div className="w-full h-64 rounded-md overflow-hidden relative">
+                    <div className="w-full max-w-[384px] h-auto mx-auto">
+                      <Image
+                        src="/lungaca.png"
+                        alt="Input Slide"
+                        width={384}
+                        height={384}
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground">Input Slide (placeholder)</p>
+                <p className="mt-3 text-sm text-muted-foreground">Lung Adenocarcinoma</p>
               </div>
               <div className="rounded-lg overflow-hidden border border-border bg-card p-4 flex flex-col items-center justify-center">
-                <div className="w-full h-64 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center">
-                  <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded" />
+                <div className="w-full h-64 rounded-md overflow-hidden relative">
+                  <Image
+                    src="/heatmaplung.png"
+                    alt="Input Slide"
+                    fill
+                    className="rounded-md object-contain"
+                  />
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground">Heatmap (placeholder)</p>
+                <p className="mt-3 text-sm text-muted-foreground">Heatmap for Lung Adenocarcinoma</p>
               </div>
             </div>
           </div>

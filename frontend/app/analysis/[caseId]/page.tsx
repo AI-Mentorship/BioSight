@@ -96,21 +96,9 @@ export default function AnalysisPage({ params }: { params: { caseId: string } })
                       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-accent/20 to-primary/20 pointer-events-none rounded-lg" />
                     )}
                   </div>
-
-                  {/* Controls */}
-                  <div className="flex gap-2 mt-4">
-                    <Button
-                      variant={showHeatmap ? "default" : "outline"}
-                      onClick={() => setShowHeatmap(!showHeatmap)}
-                      size="sm"
-                    >
-                      {showHeatmap ? "Hide" : "Show"} Heatmap
-                    </Button>
-                  </div>
                 </CardContent>
               </Card>
             </div>
-
             {/* Right Sidebar */}
             <div className="space-y-6">
               {/* Summary Stats */}
@@ -157,107 +145,6 @@ export default function AnalysisPage({ params }: { params: { caseId: string } })
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Explanation */}
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle className="text-lg">Why?</CardTitle>
-                  <CardDescription>Model interpretability</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-foreground leading-relaxed">
-                    The model&apos;s prediction reflects patterns learned from
-                    histopathological images of{" "}
-                    <span className="font-semibold capitalize">
-                      {cancerType}
-                    </span>
-                    . This includes cellular morphology, tissue architecture,
-                    and texture features associated with the predicted class{" "}
-                    <span className="font-semibold">{predictedClass}</span>.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Confidence Breakdown */}
-          <Card className="border-border mt-6">
-            <CardHeader>
-              <CardTitle>Confidence Breakdown by Region</CardTitle>
-              <CardDescription>
-                AI model confidence scores across analyzed tissue regions
-                (placeholder demo)
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={confidenceData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                  <XAxis dataKey="region" stroke="var(--color-muted-foreground)" />
-                  <YAxis stroke="var(--color-muted-foreground)" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "var(--color-card)",
-                      border: "1px solid var(--color-border)",
-                      borderRadius: "var(--radius)",
-                    }}
-                  />
-                  <Bar
-                    dataKey="confidence"
-                    fill="var(--color-primary)"
-                    radius={[8, 8, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          {/* Region Details */}
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-4 text-foreground">
-              Region Details
-            </h3>
-            <div className="space-y-3">
-              {confidenceData.map((region) => (
-                <Card key={region.region} className="border-border">
-                  <button
-                    onClick={() =>
-                      setExpandedRegion(
-                        expandedRegion === region.region ? null : region.region
-                      )
-                    }
-                    className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary/30 transition-colors"
-                  >
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-3 h-3 rounded-full bg-primary" />
-                      <div className="text-left">
-                        <p className="font-semibold text-foreground">
-                          {region.region}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          Confidence: {region.confidence}%
-                        </p>
-                      </div>
-                    </div>
-                    <ChevronDown
-                      className={`w-5 h-5 text-muted-foreground transition-transform ${
-                        expandedRegion === region.region ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-
-                  {expandedRegion === region.region && (
-                    <div className="px-6 py-4 border-t border-border bg-secondary/20">
-                      <p className="text-sm text-foreground">
-                        Tissue analysis shows characteristic cellular morphology
-                        associated with the model&apos;s prediction. This
-                        section is placeholder text you can later replace with
-                        region-level explanations from your heatmap pipeline.
-                      </p>
-                    </div>
-                  )}
-                </Card>
-              ))}
             </div>
           </div>
         </div>

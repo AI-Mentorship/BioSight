@@ -35,7 +35,7 @@ class OralCancerClassifier(nn.Module):
       output = self.classifier(x)
       return output
   
-  class ColonCancerClassifer(nn.Module):
+class ColonCancerClassifier(nn.Module):
     def __init__(self, num_classes=2):
         super().__init__()
         self.base_model = timm.create_model('efficientnet_b0', pretrained=True)
